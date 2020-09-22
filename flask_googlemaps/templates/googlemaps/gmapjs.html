@@ -1,12 +1,11 @@
 
 {%  if not is_googlemaps_loaded()  %}
     {% if GOOGLEMAPS_KEY %}
-        <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&language={{gmap.language}}&region={{gmap.region}}&map_ids={{GOOGLEMAPS_MAP_ID}}&v=beta" type="text/javascript"></script>
-        <!-- {% if GOOGLEMAPS_MAP_ID %}
+        {% if GOOGLEMAPS_MAP_ID %}
             <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&language={{gmap.language}}&region={{gmap.region}}&map_ids={{GOOGLEMAPS_MAP_ID}}&v=beta" type="text/javascript"></script>
         {%  else %}
             <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&language={{gmap.language}}&region={{gmap.region}}" type="text/javascript"></script>
-        {%  endif %} -->
+        {%  endif %}
     {%  else %}
         <script src="//maps.googleapis.com/maps/api/js?language={{gmap.language}}&region={{gmap.region}}" type="text/javascript"></script>
     {%  endif %}
