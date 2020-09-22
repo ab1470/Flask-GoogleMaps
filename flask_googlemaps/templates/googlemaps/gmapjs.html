@@ -36,7 +36,7 @@
         document.getElementById('{{gmap.identifier}}'), {
             center: new google.maps.LatLng({{gmap.center.0}}, {{gmap.center.1}}),
             zoom: {{gmap.zoom}},
-            mapId: "'{{gmap.map_id}}''",
+            mapId: '{{gmap.map_id}}',
             mapTypeId: google.maps.MapTypeId.{{gmap.maptype}},
             zoomControl: {% if gmap.zoom_control %}true{% else %}false{% endif %},
             mapTypeControl: {% if gmap.maptype_control %}true{% else %}false{% endif %},
