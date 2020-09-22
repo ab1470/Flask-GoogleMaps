@@ -1,7 +1,10 @@
 
 {%  if not is_googlemaps_loaded()  %}
     {% if GOOGLEMAPS_KEY %}
-        <script src="//maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&language={{gmap.language}}&region={{gmap.region}}" type="text/javascript"></script>
+        {% if GOOGLEMAPS_MAP_ID %}
+            <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&language={{gmap.language}}&region={{gmap.region}}&map_ids={{GOOGLEMAPS_MAP_ID}}&v=beta" type="text/javascript"></script>
+        {%  else %}
+            <script src="https://maps.googleapis.com/maps/api/js?key={{GOOGLEMAPS_KEY}}&language={{gmap.language}}&region={{gmap.region}}" type="text/javascript"></script>
     {%  else %}
         <script src="//maps.googleapis.com/maps/api/js?language={{gmap.language}}&region={{gmap.region}}" type="text/javascript"></script>
     {%  endif %}
@@ -78,7 +81,7 @@
             'click',
 			function(event) { clickposCallback('{{gmap.clickpos_uri}}', event.latLng) }
         );
-        {% endif %}        
+        {% endif %}
 
         {% if gmap.fit_markers_to_bounds %}
             // fit all markers in bounds
@@ -207,7 +210,7 @@
             infowindow.open(map, this);
         };
     }
-    
+
     function clickposCallback(uri, latLng) {
     	xhttp = new XMLHttpRequest();
     	xhttp.open("POST", uri);
