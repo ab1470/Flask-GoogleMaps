@@ -833,12 +833,15 @@ def is_googlemaps_loaded():
 class GoogleMaps(object):
     def __init__(self, app=None, **kwargs):
         self.key = kwargs.get("key")
+        self.map_id = kwargs.get("map_id")
         if app:
             self.init_app(app)
 
     def init_app(self, app):
         if self.key:
             app.config["GOOGLEMAPS_KEY"] = self.key
+        if self.map_id:
+            app.config["GOOGLEMAPS_MAP_ID"] = self.map_id
         self.register_blueprint(app)
         app.add_template_filter(googlemap_html)
         app.add_template_filter(googlemap_js)
@@ -847,6 +850,9 @@ class GoogleMaps(object):
         app.add_template_global(googlemap)
         app.add_template_global(
             app.config.get("GOOGLEMAPS_KEY"), name="GOOGLEMAPS_KEY"
+        )
+        app.add_template_global(
+            app.config.get("GOOGLEMAPS_MAP_ID"), name="GOOGLEMAPS_MAP_ID"
         )
         app.add_template_global(set_googlemaps_loaded)
         app.add_template_global(is_googlemaps_loaded)
