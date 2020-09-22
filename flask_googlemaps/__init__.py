@@ -726,6 +726,7 @@ class Map(object):
             "center": self.center,
             "zoom": self.zoom,
             "maptype": self.maptype,
+            "map_id": self.map_id,
             "markers": self.markers,
             "varname": self.varname,
             "style": self.style,
