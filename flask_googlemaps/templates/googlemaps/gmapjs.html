@@ -130,8 +130,8 @@
                         getInfoCallback({{gmap.varname}}, raw_rectangles[i].infobox)
                 );
            }
-           {{gmap.varname}}.fitBounds({{gmap.varname}}_bounds);
         }
+        {{gmap.varname}}.fitBounds({{gmap.varname}}_bounds);
 
         // add circles
         var raw_circles = {{ gmap.circles|tojson|safe }};
