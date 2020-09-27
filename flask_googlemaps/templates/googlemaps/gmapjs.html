@@ -120,6 +120,7 @@
             // {% if gmap.fit_markers_to_bounds %}
             {{gmap.varname}}_bounds.extend({lat: north, lng: east});
             {{gmap.varname}}_bounds.extend({lat: south, lng: west});
+            console.log({lat: north, lng: east})
             // {% endif %}
 
            if(raw_rectangles[i].infobox)
@@ -131,6 +132,7 @@
                 );
            }
         }
+        console.log({{gmap.varname}}_bounds)
         {{gmap.varname}}.fitBounds({{gmap.varname}}_bounds);
 
         // add circles
