@@ -96,7 +96,13 @@
 
         // add rectangles
         var raw_rectangles = {{ gmap.rectangles|tojson|safe }};
+        var {{gmap.varname}}_bounds = new google.maps.LatLngBounds();
         for(i = 0; i < {{ gmap.rectangles|length }}; i++) {
+            const north = raw_rectangles[i].bounds.north;
+            const east = raw_rectangles[i].bounds.east;
+            const south = raw_rectangles[i].bounds.south;
+            const west = raw_rectangles[i].bounds.west;
+
             {{ gmap.varname }}_rectangles[i] = new google.maps.Rectangle({
                 strokeColor: raw_rectangles[i].stroke_color,
                 strokeOpacity: raw_rectangles[i].stroke_opacity,
@@ -105,11 +111,16 @@
                 fillOpacity: raw_rectangles[i].fill_opacity,
                 map: {{gmap.varname}},
                 bounds: {
-                    north: raw_rectangles[i].bounds.north,
-                    east: raw_rectangles[i].bounds.east,
-                    south: raw_rectangles[i].bounds.south,
-                    west: raw_rectangles[i].bounds.west },
+                    north: north,
+                    east: east,
+                    south: south,
+                    west: west },
             });
+
+            // {% if gmap.fit_markers_to_bounds %}
+            {{gmap.varname}}_bounds.extend({lat: north, lng: east});
+            {{gmap.varname}}_bounds.extend({lat: south, lng: west});
+            // {% endif %}
 
            if(raw_rectangles[i].infobox)
            {
@@ -119,6 +130,7 @@
                         getInfoCallback({{gmap.varname}}, raw_rectangles[i].infobox)
                 );
            }
+           {{gmap.varname}}.fitBounds({{gmap.varname}}_bounds);
         }
 
         // add circles
